@@ -7,7 +7,7 @@ pipeline {
                 sh 'pwd'
                 sh 'cd app'
                 echo 'But the path is '
-                sh 'pwd
+                sh 'pwd'
                 echo 'npm install'
             }
         }
