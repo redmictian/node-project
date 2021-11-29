@@ -15,8 +15,6 @@ pipeline {
             steps {
                 echo "Testing the app"
                 echo 'npm test'
-                echo "Executing pipeline for branch $BRANCH_NAME"
-                
             }
         }
     }
