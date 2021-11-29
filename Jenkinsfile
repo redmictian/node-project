@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("Managing depencies") {
             steps {
-                sh 'cd app/'
+                sh 'cd app && pwd'
                 sh 'npm install'
             }
         }
