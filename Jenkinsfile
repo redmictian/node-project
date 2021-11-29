@@ -3,14 +3,18 @@ pipeline {
     stages {
         stage("Managing depencies") {
             steps {
-                sh 'cd app && pwd'
-                sh 'npm install'
+                echo 'Initially Im at '
+                sh 'pwd'
+                sh 'cd app'
+                echo 'But the path is '
+                sh 'pwd
+                echo 'npm install'
             }
         }
         stage("testing") {
             steps {
                 echo "Testing the app"
-                sh 'npm test'
+                echo 'npm test'
                 echo "Executing pipeline for branch $BRANCH_NAME"
                 
             }
