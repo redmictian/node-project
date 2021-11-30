@@ -3,18 +3,14 @@ pipeline {
     stages {
         stage("Managing depencies") {
             steps {
-                echo 'Initially Im at '
-                sh 'pwd'
-                sh 'cd app'
-                echo 'But the path is '
-                sh 'pwd'
-                echo 'npm install'
+                echo 'Managing depencies'
+                sh 'npm --prefix ./app install'
             }
         }
         stage("testing") {
             steps {
                 echo "Testing the app"
-                echo 'npm test'
+                sh 'npm --prefix ./app test'
             }
         }
     }
