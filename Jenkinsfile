@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage("Managing depencies") {
+        stage("depencies") {
             steps {
                 echo 'Managing depencies'
                 sh 'npm --prefix ./app install'
@@ -15,7 +15,7 @@ pipeline {
         }
         stage("Docker build") {
             steps {
-                echo "Building the app"
+                echo "building the app"
                 sh 'docker build -t redmictian/node-project:1.1 .'
             }
         }
