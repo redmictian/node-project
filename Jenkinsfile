@@ -13,6 +13,14 @@ pipeline {
                 sh 'npm --prefix ./app test'
             }
         }
+        stage("incrementing") {
+            steps {
+                echo "Incrementing the app version"
+                sh 'npm --prefix ./app version patch'
+                def version = readJSON: 'app/package.json'
+                echo "version is $version"
+            }
+        }
         stage("docker build") {
             steps {
                 echo "building the the docker image"
