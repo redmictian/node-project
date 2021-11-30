@@ -13,10 +13,14 @@ pipeline {
                 sh 'npm --prefix ./app test'
             }
         }
-        stage("Docker build") {
+        stage("docker build") {
             steps {
-                echo "building the app"
-                sh 'docker build -t redmictian/node-project:1.1 .'
+                echo "building the the docker image"
+                withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                   sh 'docker build -t redmictian/node-project:1.1 .'
+                   sh "echo $PASS | docker login -u $USER --password-stdin"
+                   sh 'docker push redmictian/node-project:1.3'
+                }
             }
         }
     }
