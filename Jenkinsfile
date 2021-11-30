@@ -17,10 +17,7 @@ pipeline {
             steps {
                 echo "Building the app"
                 sh 'docker build -t redmictian/node-project:1.1 .'
-<<<<<<< HEAD
             }
-=======
->>>>>>> 51483ae132c10086503c4cad1aee282cd73018fa
         }
     }
 }
