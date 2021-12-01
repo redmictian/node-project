@@ -17,8 +17,8 @@ pipeline {
             steps {
                 echo "Incrementing the app version"
                     script {
-                        def version = sh returnStdout: true, script: 'npm --prefix ./app version patch | sed s/v//'
-                        println version
+                        env.VERSION = sh returnStdout: true, script: 'npm --prefix ./app version patch | sed s/v//'
+                        println VERSION
                     /*  def version = readJSON: 'app/package.json'
                         echo "version is $version" */
                     }
@@ -29,9 +29,9 @@ pipeline {
             steps {
                 echo "building the the docker image"
                 withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                   sh "docker build -t redmictian/node-project:$version ."
+                   sh "docker build -t redmictian/node-project:$VERSION ."
                    sh "echo $PASS | docker login -u $USER --password-stdin"
-                   sh "docker push redmictian/node-project:$version"
+                   sh "docker push redmictian/node-project:$VERSION"
                 }
             }
         }
