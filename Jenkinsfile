@@ -16,7 +16,8 @@ pipeline {
         stage("incrementing") {
             steps {
                 echo "Incrementing the app version"
-                def version = sh returnStdout: true, script: 'npm --prefix ./app version patch | sed s/v//'
+                /*def version = sh returnStdout: true, script: 'npm --prefix ./app version patch | sed s/v//' */
+                def version = sh returnStdout: true, script: 'echo 1.0.1'
                 println version
 /*                def version = readJSON: 'app/package.json'
                 echo "version is $version" */
