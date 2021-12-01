@@ -27,12 +27,15 @@ pipeline {
         }
         stage("docker build") {
             steps {
-                echo "building the the docker image"
-                withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                   sh "docker build -t redmictian/node-project:$VERSION ./Dockerfile"
-                   sh "echo $PASS | docker login -u $USER --password-stdin"
-                   sh "docker push redmictian/node-project:$VERSION"
-                }
+                    script {
+                        echo "building the the docker image"
+                        withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                            sh "docker build -t redmictian/node-project:$VERSION ./Dockerfile"
+                            sh "echo $PASS | docker login -u $USER --password-stdin"
+                            sh "docker push redmictian/node-project:$VERSION"
+                        }
+                    }
+                
             }
         }
     }
