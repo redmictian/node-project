@@ -30,7 +30,9 @@ pipeline {
                     script {
                         echo "building the the docker image"
                         withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                            echo 'docker build -t redmictian/node-project:$VERSION .'
+                            echo "docker build -t redmictian/node-project:$VERSION ."
+                            echo "docker build -t redmictian/node-project:$VERSION . space dot"
+                            echo "docker build -t redmictian/node-project:$VERSION he.re"
                             sh "echo $PASS | docker login -u $USER --password-stdin"
                        //     sh "docker push redmictian/node-project:$VERSION"
                         }
