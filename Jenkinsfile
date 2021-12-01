@@ -15,14 +15,13 @@ pipeline {
         }
         stage("incrementing") {
             steps {
-                echo "Incrementing the app version"
                     script {
+                        echo "Incrementing the app version"
                         env.VERSION = sh returnStdout: true, script: 'npm --prefix ./app version patch | sed s/v//'
                         println VERSION
                     /*  def version = readJSON: 'app/package.json'
                         echo "version is $version" */
                     }
-                
             }
         }
         stage("docker build") {
@@ -30,11 +29,9 @@ pipeline {
                     script {
                         echo "building the the docker image"
                         withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                            echo "docker build -t redmictian/node-project:$VERSION ."
-                            echo "docker build -t redmictian/node-project:$VERSION . space dot"
-                            echo "docker build -t redmictian/node-project:$VERSION he.re"
+                            sh "docker build -t redmictian/node-project:$VERSION \ ."
                             sh "echo $PASS | docker login -u $USER --password-stdin"
-                       //     sh "docker push redmictian/node-project:$VERSION"
+                            sh "docker push redmictian/node-project:$VERSION"
                         }
                     }
                 
