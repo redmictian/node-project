@@ -17,7 +17,7 @@ pipeline {
             steps {
                     script {
                         echo "Incrementing the app version"
-                        env.VERSION = sh returnStdout: true, script: 'npm --prefix ./app version patch'
+                        env.VERSION = sh( returnStdout: true, script: 'npm --prefix ./app version patch | sed s/v//').trim()
                     /*  def version = readJSON: 'app/package.json'
                         echo "version is $version" */
                     }
