@@ -46,7 +46,7 @@ pipeline {
 						sh "git remote set-url origin https://${USER}:${PASS}@github.com:redmictian/node-project.git"
 						sh 'git add .'
 						sh 'git commit -m "ci: version bump"'
-						sh 'git push'
+						sh 'git push origin HEAD:main'
 					}
 				}
 			}
