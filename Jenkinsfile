@@ -36,7 +36,7 @@ pipeline {
         stage('commit version update') {
 			steps {
 				script {
-					withCredentials([usernamePassword(credentialsId: 'github-personal', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+					withCredentials([usernamePassword(credentialsId: 'github-personal-token', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
 						sh 'git config --global user.email "jenkins@example.com"'					
 						sh 'git config --global user.name "jenkins"'	
 						sh 'git status'
