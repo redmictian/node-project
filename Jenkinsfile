@@ -36,15 +36,12 @@ pipeline {
         stage('commit version update') {
 			steps {
 				script {
+                    echo "Commiting the new version $VERSION to the repository"
 					withCredentials([usernamePassword(credentialsId: 'github-personal-token', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
 						sh 'git config --global user.email "jenkins@example.com"'					
 						sh 'git config --global user.name "jenkins"'	
-						sh 'git status'
-						sh 'git branch'
-						sh 'git config --list'
 						sh "git remote set-url origin https://${USER}:${PASS}@github.com/redmictian/node-project.git"
-						sh 'git add .'
-						sh 'git commit -m "ci: version bump"'
+						sh 'git commit -am "ci: version $VERSION bump"'
 						sh 'git push origin HEAD:main'
 					}
 				}
