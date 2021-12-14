@@ -1,3 +1,4 @@
+def gv
 pipeline {
     agent any
     stages {
@@ -9,8 +10,10 @@ pipeline {
         }
         stage("testing") {
             steps {
-                echo "Testing the app"
-                sh 'npm --prefix ./app test'
+                script {
+                    gv = load "testing.groovy"
+                    gv.testNode()
+                }
             }
         }
         stage("incrementing") {
