@@ -1,9 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage("depencies") {
+        stage("dependencies") {
             steps {
-                echo 'Managing depencies'
+                echo 'Managing dependencies'
                 sh 'npm --prefix ./app install'
             }
         }
